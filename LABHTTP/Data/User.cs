@@ -8,7 +8,7 @@ namespace LABHTTP.Data
         public Guid UserId { get; set; } = Guid.NewGuid();
 
         [MaxLength(100)]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [Required]
         public string Password { get; set; }
@@ -23,6 +23,6 @@ namespace LABHTTP.Data
 
         [Phone]
         [MaxLength(20)]
-        public string Phone { get; set; }
+        public string? Phone { get; set; }
     }
 }

@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace LABHTTP.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251218191457_first")]
-    partial class first
+    [Migration("20251218210320_asd")]
+    partial class asd
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,7 +37,6 @@ namespace LABHTTP.Migrations
                         .HasColumnType("character varying(150)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
@@ -46,7 +45,6 @@ namespace LABHTTP.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Phone")
-                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("character varying(20)");
 

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace LABHTTP.Migrations
 {
     /// <inheritdoc />
-    public partial class first : Migration
+    public partial class asd : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,11 +16,11 @@ namespace LABHTTP.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
                     Password = table.Column<string>(type: "text", nullable: false),
                     Role = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     Email = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
-                    Phone = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false)
+                    Phone = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: true)
                 },
                 constraints: table =>
                 {

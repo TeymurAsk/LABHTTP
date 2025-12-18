@@ -34,7 +34,6 @@ namespace LABHTTP.Migrations
                         .HasColumnType("character varying(150)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
@@ -43,7 +42,6 @@ namespace LABHTTP.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Phone")
-                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("character varying(20)");
 

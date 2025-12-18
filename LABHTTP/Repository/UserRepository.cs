@@ -17,10 +17,10 @@ namespace LABHTTP.Repository
             return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
         }
 
-        public async Task AddAsync(User user)
+        public void AddAsync(User user)
         {
             _context.Users.Add(user);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
     }
