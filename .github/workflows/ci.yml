@@ -1,0 +1,53 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 9.0.x  # Use .NET 9
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --no-restore --configuration Release
+
+    - name: Test with coverage
+      run: |
+        dotnet test \
+          --no-build \
+          --configuration Release \
+          /p:CollectCoverage=true \
+          /p:CoverletOutputFormat=cobertura \
+          /p:CoverletOutput=TestResults/coverage.xml
+      continue-on-error: false
+
+    - name: Generate coverage report
+      uses: danielpalme/ReportGenerator-action@v5
+      with:
+        reports: TestResults/coverage.xml
+        targetdir: TestResults/CoverageReport
+        reporttypes: Html
+
+    - name: Upload coverage report
+      uses: actions/upload-artifact@v3
+      with:
+        name: CoverageReport
+        path: TestResults/CoverageReport
+
+    - name: Run dotnet format
+      run: dotnet format --verify-no-changes
+      continue-on-error: false
