@@ -2,8 +2,10 @@
 using LABHTTP.Model.DTO;
 using LABHTTP.Repository;
 using LABHTTP.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -25,12 +27,33 @@ namespace LABHTTP.Controllers
             _passwordHasher = passwordHasher;
             _userRepository = userRepository;
         }
+        [Authorize]
+        [HttpGet("me")]
+        public IActionResult Me()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            return Ok(userId);
+        }
+        [Authorize]
+        [HttpPost("logout")]
+        public IActionResult Logout()
+        {
+            Response.Cookies.Delete("jwt", new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.None
+            });
+
+            return NoContent();
+        }
+        [AllowAnonymous]
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginRequest request)
         {
             var user = _db.Users.FirstOrDefault(u => u.Email == request.Email);
             if (user == null)
-                return Unauthorized("User not found");
+                return Unauthorized("Invalid Credentials");
             if (_passwordHasher.Verify(request.Password, user.Password))
             {
                 var token = _service.GenerateJwtToken(user);
@@ -39,16 +62,17 @@ namespace LABHTTP.Controllers
                     HttpOnly = true,
                     Secure = true,
                     SameSite = SameSiteMode.None,
-                    Expires = DateTime.UtcNow.AddHours(1)
+                    Expires = DateTime.UtcNow.AddMinutes(15)
                 });
 
                 return Ok();
             }
             else
             {
-                return BadRequest("False Login Info");
+                return Unauthorized("Invalid Credentials");
             }
         }
+        [AllowAnonymous]
         [HttpPost("register")]
         public IActionResult Register([FromBody] CreateUserRequest request)
         {
@@ -64,9 +88,9 @@ namespace LABHTTP.Controllers
             Response.Cookies.Append("jwt", token, new CookieOptions
             {
                 HttpOnly = true,
-                Secure = true,
+                Secure = HttpContext.Request.IsHttps,
                 SameSite = SameSiteMode.None,
-                Expires = DateTime.UtcNow.AddHours(1)
+                Expires = DateTime.UtcNow.AddMinutes(15)
             });
 
             return Ok();

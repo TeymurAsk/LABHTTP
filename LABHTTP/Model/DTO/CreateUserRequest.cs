@@ -8,7 +8,7 @@ namespace LABHTTP.Model.DTO
         [Required, EmailAddress]
         public string Email { get; set; } = null!;
 
-        [Required]
+        [Required, MinLength(11)]
         public string Password { get; set; } = null!;
     }
 }

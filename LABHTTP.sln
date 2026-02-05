@@ -1,9 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36811.4 d17.14
+VisualStudioVersion = 17.14.36811.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LABHTTP", "LABHTTP\LABHTTP.csproj", "{ECB459B5-48FA-40D4-99D2-F691E0F7D6BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LABHTTP.TEST", "LABHTTP.TEST\LABHTTP.TEST.csproj", "{753FE141-F226-4978-9B12-6A39003B2846}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
+	ProjectSection(SolutionItems) = preProject
+		test.runsettings = test.runsettings
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +22,10 @@ Global
 		{ECB459B5-48FA-40D4-99D2-F691E0F7D6BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECB459B5-48FA-40D4-99D2-F691E0F7D6BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ECB459B5-48FA-40D4-99D2-F691E0F7D6BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{753FE141-F226-4978-9B12-6A39003B2846}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{753FE141-F226-4978-9B12-6A39003B2846}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{753FE141-F226-4978-9B12-6A39003B2846}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{753FE141-F226-4978-9B12-6A39003B2846}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
